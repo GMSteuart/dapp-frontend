@@ -47,11 +47,10 @@ export default function ArtistView() {
         if (address) {
           setArtistAddres(address);
           let objects = await getSubgraphData("creator", address);
-          await Promise.all(
-            objects.fraktalNfts.map(x => {
-              return createObject2(x);
-            })
-          ).then(results => setNftItems(results));
+          const results = await Promise.all(
+            objects.fraktalNfts.map(x => createObject2(x))
+          );
+          setNftItems(results)
           toast.success("Data fetched");
         }
       } catch (error) {
@@ -78,7 +77,7 @@ export default function ArtistView() {
             onChange={searchHandle}
           />
           {
-            artist_Address !=="" &&
+            artist_Address !== "" &&
               <NextLink
                       href={`/artist/${artist_Address.startsWith("0x") ? artist_Address : ethAddressFromENS}`}
                       key={`link--${artist_Address}`}
@@ -104,8 +103,8 @@ export default function ArtistView() {
                   <NFTItem
                     key={item.id}
                     name={item.name}
-                    imageURL={item.imageURL}
-                  />
+                    imageURL={item.imageURL} 
+                    item={undefined} amount={undefined} price={undefined}                  />
                 </NextLink>
               );
             })}
