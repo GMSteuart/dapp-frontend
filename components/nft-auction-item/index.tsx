@@ -158,7 +158,7 @@ const NFTAuctionItem = forwardRef<HTMLDivElement, NFTItemProps>(
               </Text>
               <Flex>
                 {(amount!=0) && (
-                  <Text className="medium-12">{amount==0?"Not":`${amount / 100}%`} Available</Text>
+                  <Text className="medium-12">{`${amount / 100}%`} Available</Text>
                 )}
 
                 <Spacer />
