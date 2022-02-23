@@ -183,7 +183,7 @@ export async function createListed(data){
     console.error(err)
     console.info(data)
   }
-};
+}
 
 export async function createListedAuction(data){
   try{
@@ -204,4 +204,4 @@ export async function createListedAuction(data){
   }catch (err){
     console.error(err)
   }
-};
+}
