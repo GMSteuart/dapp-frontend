@@ -49,6 +49,18 @@ const Heading: ComponentStyleConfig = {
   }
 }
 
+const Tabs: ComponentStyleConfig = {
+  parts: ["root", "tab", "tablist", "tabpanel", "tabpanels", "indicator"],
+  baseStyle: {
+    tab: {
+      fontSize: "1.8rem",
+      _selected: { fontSize: "1.8rem", color: "white", background: "#405466", fontWeight: 700 }
+      // _active,
+      // _disabled
+    }
+  }
+}
+
 /**
  *  Theme
  */
@@ -72,6 +84,7 @@ const customTheme = extendTheme({
   },
   components: {
     Heading,
+    Tabs,
     Text,
   }
 });

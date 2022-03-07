@@ -13,7 +13,8 @@ import {
   Spinner,
   Tab,
   Tabs,
-  TabList
+  TabList,
+  useMultiStyleConfig
 } from "@chakra-ui/react";
 
 /**
@@ -57,9 +58,11 @@ const entityTypes = ["FIXED", "AUCTION"]
  * @type {string}
  */
 const listingOptions = [
-  { type: "FIXED", label: "Fixed Price",  filter: (item) => !item.hasOwnProperty("end")},
+  { type: "FIXED", label: "Fixed Price", filter: (item) => !item.hasOwnProperty("end")},
   { type: "AUCTION", label: "Auctions", filter: (item) => item.hasOwnProperty("end")},
 ]
+
+const [fixed, auction] = listingOptions
 
 const hasNonZeroReservePrice = ({price}) => (!!Number(price))
 
@@ -90,6 +93,8 @@ const Marketplace: React.FC = () => {
   // const [limit, setLimit] = useState(15)
   // const [offset, setOffset] = useState(0)
   // const [orderDirection, setOrderDirection] = useState("desc")
+
+  const styles = useMultiStyleConfig('Tabs', { size: "md", variant: "unstyled"})
 
   useEffect(() => {
     const getAll = async function () {
@@ -204,16 +209,18 @@ const Marketplace: React.FC = () => {
           <Text className="semi-48" marginEnd="2rem">
             Marketplace
           </Text>
-          <Tabs isFitted defaultIndex={0} size="lg" align="start" variant="enclosed" alignSelf="end" flexGrow={1}>
+          <Tabs isFitted defaultIndex={0} align="start" alignSelf="end" variant="unstyled" flexGrow={1} size="lg">
             <TabList mb="1em">
-            {
-                listingOptions.map(({label}, idx) => (
                   <Tab
-                    key={`listing-type-${idx}`}
-                    onClick={() => setListingOptionId(idx)}
-                  >{label}</Tab>
-                ))
-              }
+                    fontSize="1.8rem"
+                    _selected={{ ...styles.tab._selected, borderRadius: '16px 0 0 16px' }}
+                    onClick={() => setListingOptionId(0)}
+                  >{fixed.label}</Tab>
+                  <Tab
+                    fontSize="1.8rem"
+                    _selected={{ ...styles.tab._selected, borderRadius: '0 16px 16px 0' }}
+                    onClick={() => setListingOptionId(1)}
+                  >{auction.label}</Tab>
             </TabList>
           </Tabs>
           <Menu closeOnSelect={true}>
